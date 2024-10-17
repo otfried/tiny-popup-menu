@@ -15,7 +15,7 @@
     "watch": "rollup -w --config rollup.config.dist.js --dev",
     "format": "eslint --fix src && prettier --write src",
     "lint": "eslint src && prettier --check src",
-    "build": "npm run lint && rollup --config rollup.config.dist.js && rollup --config rollup.config.js"
+    "build": "rollup --config rollup.config.dist.js && rollup --config rollup.config.js"
   },
   "keywords": [
     "menu",
