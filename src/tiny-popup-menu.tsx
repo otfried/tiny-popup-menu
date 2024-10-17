@@ -163,30 +163,6 @@ export default class TinyPopupMenu extends TinyEmitter {
 	 * @fires updateposition
 	 */
 	public updatePosition(silent = true): void {
-		/**
-		 * Check if the default position is ok or needs to be inverted
-		 */
-		const evaluatePosition = (): PositionType => {
-			if (position === Position.Top) {
-				if (togglerPosition.top - menuHeight - offsetTop - margin <= 0) {
-					return Position.Bottom;
-				}
-			} else if (position === Position.Bottom) {
-				if (
-					togglerPosition.top +
-						menuHeight +
-						offsetTop +
-						togglerHeight +
-						margin >=
-					document.documentElement.offsetHeight
-				) {
-					return Position.Top;
-				}
-			}
-
-			return position;
-		};
-
 		if (!this.isOpen()) return;
 
 		const { event, offset, className, arrow, position, margin } = this._options;
@@ -214,6 +190,30 @@ export default class TinyPopupMenu extends TinyEmitter {
 
 			const togglerHeight = this._toggler.offsetHeight;
 			const togglerWidth = this._toggler.offsetWidth;
+
+			/**
+			 * Check if the default position is ok or needs to be inverted
+			 */
+			const evaluatePosition = (): PositionType => {
+				if (position === Position.Top) {
+					if (togglerPosition.top - menuHeight - offsetTop - margin <= 0) {
+						return Position.Bottom;
+					}
+				} else if (position === Position.Bottom) {
+					if (
+						togglerPosition.top +
+							menuHeight +
+							offsetTop +
+							togglerHeight +
+							margin >=
+						document.documentElement.offsetHeight
+					) {
+						return Position.Top;
+					}
+				}
+
+				return position;
+			};
 
 			const offsetLeft = offset?.x || 0;
 			const offsetTop = offset?.y || 0;

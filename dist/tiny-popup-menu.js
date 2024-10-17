@@ -1,7 +1,7 @@
 /*!
  * tiny-popup-menu - v1.0.10
  * https://github.com/GastonZalba/tiny-popup-menu#readme
- * Built: Thu Oct 17 2024 12:25:47 GMT+0200 (Central European Summer Time)
+ * Built: Thu Oct 17 2024 12:30:46 GMT+0200 (Central European Summer Time)
 */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
@@ -274,27 +274,6 @@
        * @fires updateposition
        */
       updatePosition(silent = true) {
-          /**
-           * Check if the default position is ok or needs to be inverted
-           */
-          const evaluatePosition = () => {
-              if (position === Position.Top) {
-                  if (togglerPosition.top - menuHeight - offsetTop - margin <= 0) {
-                      return Position.Bottom;
-                  }
-              }
-              else if (position === Position.Bottom) {
-                  if (togglerPosition.top +
-                      menuHeight +
-                      offsetTop +
-                      togglerHeight +
-                      margin >=
-                      document.documentElement.offsetHeight) {
-                      return Position.Top;
-                  }
-              }
-              return position;
-          };
           if (!this.isOpen())
               return;
           const { event, offset, className, arrow, position, margin } = this._options;
@@ -315,6 +294,27 @@
               const togglerPosition = this._toggler.getBoundingClientRect();
               const togglerHeight = this._toggler.offsetHeight;
               const togglerWidth = this._toggler.offsetWidth;
+              /**
+               * Check if the default position is ok or needs to be inverted
+               */
+              const evaluatePosition = () => {
+                  if (position === Position.Top) {
+                      if (togglerPosition.top - menuHeight - offsetTop - margin <= 0) {
+                          return Position.Bottom;
+                      }
+                  }
+                  else if (position === Position.Bottom) {
+                      if (togglerPosition.top +
+                          menuHeight +
+                          offsetTop +
+                          togglerHeight +
+                          margin >=
+                          document.documentElement.offsetHeight) {
+                          return Position.Top;
+                      }
+                  }
+                  return position;
+              };
               const offsetLeft = (offset === null || offset === void 0 ? void 0 : offset.x) || 0;
               const offsetTop = (offset === null || offset === void 0 ? void 0 : offset.y) || 0;
               // Button height + menu height
