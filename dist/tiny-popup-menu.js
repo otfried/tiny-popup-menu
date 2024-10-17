@@ -1,7 +1,7 @@
 /*!
  * tiny-popup-menu - v1.0.10
  * https://github.com/GastonZalba/tiny-popup-menu#readme
- * Built: Thu Oct 17 2024 11:49:04 GMT+0200 (Central European Summer Time)
+ * Built: Thu Oct 17 2024 12:09:25 GMT+0200 (Central European Summer Time)
 */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
@@ -228,7 +228,7 @@
               }
           }
           const { event, menuItems, autoClose, stopClick } = this._options;
-          this._toggler = event.currentTarget;
+          this._toggler = (event.currentTarget || event.target);
           let hasSubmenu = false;
           this._menuItemsList = menuItems.map((item) => {
               if (item === '-') {

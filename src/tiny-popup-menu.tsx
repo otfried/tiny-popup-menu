@@ -104,7 +104,7 @@ export default class TinyPopupMenu extends TinyEmitter {
 
         const { event, menuItems, autoClose, stopClick } = this._options;
 
-        this._toggler = event.currentTarget as HTMLElement;
+        this._toggler = (event.currentTarget || event.target) as HTMLElement;
 
         let hasSubmenu = false;
 
