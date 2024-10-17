@@ -192,7 +192,7 @@ export default class TinyPopupMenu extends TinyEmitter {
 
         if (!this.isOpen()) return;
 
-        const { offset, className, arrow, position, margin } = this._options;
+        const { event, offset, className, arrow, position, margin } = this._options;
 
         this._containerMenu.style.position = 'fixed';
         this._containerMenu.className = className;
@@ -252,9 +252,14 @@ export default class TinyPopupMenu extends TinyEmitter {
             adjustX = windowWidth - (calcualteLeft + menuWidth) - margin;
         }
 
+        if (event.currentTarget instanceof HTMLCanvasElement) {
+            this._containerMenu.style.left = event.clientX + 'px';
+            this._containerMenu.style.top = event.clientY + 'px';  
+        } else {
         this._containerMenu.style.left = calcualteLeft + adjustX + 'px';
         this._containerMenu.style.top =
             togglerPosition.top + compensateMenuHeight + 'px';
+        }
 
         this._toggler.classList.add(CLASS_OPEN);
 
